@@ -1,0 +1,40 @@
+<h1><%=@recipe.name%></h1>
+<h3>Recipe Ingredients:</h3>
+
+<ul>
+  <% @recipe.ingredients.each do |ingredient|%>
+    <li><%= ingredient.name %></li>
+    <%end%>
+</ul>
+
+
+<form action="/recipe/<%=@recipe.id%>/ingredients/select" method="post">
+
+<h2>All available ingredients:</h2>
+<h3>Select to add ingredients to the recipe.</h3>
+  <% if @all_ingredients.any? %>
+  <ul>
+    <% @all_ingredients.each do |ingredient| %>
+    <li><input type="checkbox" name="recipe_ingredients[][ingredient_id]" value="<%=ingredient.id%>"><%= ingredient.name%>---<input type="text" name="ingredient_quantity[][ingredient_quantity]" placeholder="Enter Your Quantity"></li>
+    <%end%>
+    <%else%>
+    <h3>You need to enter some ingredients</h3>
+    <%end%>
+  </ul>
+  <button type="submit">Submit</button>
+</form> <br>
+
+
+<h5>If you don't see a necessary ingredient, add it to the ingredients list here:</h5>
+<form action="/recipe/<%=@recipe.id%>/ingredients/add" method="post">
+  <label for="ingredient">Enter your ingredient:</label>
+  <input id="ingredient" type="text" name="ingredient">
+  <button type="submit">Submit</button>
+</form> <br>
+
+<form action="/recipe/<%=@recipe.id%>/instructions/add" method="post">
+  <label for="instructions">Enter instructions for your recipe. Please specify quantities for your ingredients</label>
+  <br>
+  <textarea name="instructions" rows="6" cols="30"></textarea>
+  <button type="submit">Submit </button>
+</form>

@@ -1,0 +1,16 @@
+<ul>
+  <% if @all_ingredients.nil? %>
+  <% @all_ingredients.each do |ingredient| %>
+  <li><input type="checkbox" name="recipe_ingredient[]" value="<%=ingredient.id%>"><%= ingredient.name %></li>
+  <%end%>
+</ul>
+<% else %>
+<h3>There are no ingredients yet to choose from</h3>
+<% end %>
+
+
+
+
+
+  <label for="recipe_instructions"></label>
+  <input type="text" name="recipe_instructions" id="recipe_instructions">

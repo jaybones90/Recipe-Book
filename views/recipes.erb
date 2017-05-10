@@ -1,0 +1,12 @@
+<h3>All Grandma's Recipes</h3>
+<% if  @all_recipes.any? %>
+<ul>
+  <% @all_recipes.each do |recipe| %>
+<li><a href="/recipe/<%=recipe.id%>"><%= recipe.name %></a></li>
+  <%end%>
+</ul>
+<% else %>
+<h3>There are no recipes yet</h3>
+<% end %>
+
+<a href="/recipe/new">Enter a new recipe</a>
