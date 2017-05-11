@@ -6,6 +6,16 @@
     <li><%= ingredient.name %></li>
     <%end%>
 </ul>
+<h3>Recipe Instructions:</h3>
+<ul>
+    <li>  <%= @recipe.instructions %></li>
+</ul>
+<h3>Recipe Tags:</h3>
+<ul>
+   <% @recipe.tags.each do |tag|%>
+    <li> <%=tag.category%> </li>
+    <%end%>
+</ul>
 
 
 <form action="/recipe/<%=@recipe.id%>/ingredients/select" method="post">
@@ -15,7 +25,7 @@
   <% if @all_ingredients.any? %>
   <ul>
     <% @all_ingredients.each do |ingredient| %>
-    <li><input type="checkbox" name="recipe_ingredients[][ingredient_id]" value="<%=ingredient.id%>"><%= ingredient.name%>---<input type="text" name="ingredient_quantity[][ingredient_quantity]" placeholder="Enter Your Quantity"></li>
+    <li><input type="checkbox" name="recipe_ingredients[]" value="<%=ingredient.id%>"><%= ingredient.name%></li>
     <%end%>
     <%else%>
     <h3>You need to enter some ingredients</h3>
@@ -36,5 +46,12 @@
   <label for="instructions">Enter instructions for your recipe. Please specify quantities for your ingredients</label>
   <br>
   <textarea name="instructions" rows="6" cols="30"></textarea>
+  <button type="submit">Submit </button>
+</form>
+
+<form action="/recipe/<%=@recipe.id%>/tags/add" method="post">
+  <label for="tag">Enter a tag for your recipe</label>
+  <br>
+  <input type="text" name="tag" id="tag">
   <button type="submit">Submit </button>
 </form>

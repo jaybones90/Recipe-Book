@@ -38,12 +38,20 @@ end
 post "/recipe/:id/ingredients/select" do
   @recipe = Recipe.find(params['id'].to_i)
   ingredient_ids = params.fetch("recipe_ingredients")
-  x = params.fetch("ingredients_quantity")
-  binding.pry
   ingredient_ids.map { |ingredient_id| @recipe.ingredients.push(Ingredient.find(ingredient_id))  }
   redirect "/recipe/#{@recipe.id}"
 end
 
-post "/recipe/<%=@recipe.id%>/instructions/add" do
+post "/recipe/:id/instructions/add" do
+  @recipe = Recipe.find(params['id'].to_i)
+  instructions = params['instructions']
+  @recipe.update(instructions: instructions)
 
+end
+
+post "/recipe/:id/tags/add" do
+  @recipe = Recipe.find(params['id'].to_i)
+  tag = params['tag']
+  @recipe.tags.push(Tag.new(category: tag))
+  redirect "/recipe/#{@recipe.id}"
 end
