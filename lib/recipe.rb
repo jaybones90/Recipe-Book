@@ -10,6 +10,8 @@ class Recipe < ActiveRecord::Base
     self.name = name.upcase
   end
 
-
+  scope(:not_poop_stopper, -> (name)do
+    where({"name" == "PIZZA"})
+  end)
 
 end

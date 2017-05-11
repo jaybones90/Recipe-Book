@@ -18,7 +18,7 @@ end
 
 post "/recipe/new" do
   recipe_name = params['recipe_name']
-  new_recipe = Recipe.create({:name => recipe_name})
+  new_recipe = Recipe.create(name: recipe_name, rating: 10)
   redirect "/"
 end
 
@@ -104,4 +104,14 @@ get "/tag/:id" do
   @tag = Tag.find(params['id'])
   @all_recipes = Recipe.all
   erb(:recipe_tags)
+end
+
+get "/ingredients" do
+  @all_ingredients = Ingredient.all
+  erb(:ingredients)
+end
+
+get "/ingredient/:id" do
+  @ingredient = Ingredient.find(params['id'].to_i)
+  erb(:ingredient)
 end
