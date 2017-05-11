@@ -62,3 +62,9 @@ patch "/recipe/:id/ingredient/delete" do
   @recipe.ingredients.delete(ingredient)
   redirect "/recipe/#{@recipe.id}"
 end
+
+delete "/recipe/:id/instruction/delete" do
+  @recipe = Recipe.find(params['id'].to_i)
+  instructions = params["instructions"]
+  @recipe.instructions
+end

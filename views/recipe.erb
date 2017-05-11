@@ -1,26 +1,33 @@
 <h1><%=@recipe.name%></h1>
 <div class="row">
 
-  <div class="col-md-4">
+  <div class="col-md-5">
     <h3>Recipe Ingredients:</h3>
     <ul>
+      <% @recipe.ingredients.each do |ingredient|%>
       <form action="/recipe/<%=@recipe.id%>/ingredient/delete" method="post">
         <input type="hidden" name="_method" value="patch">
-        <% @recipe.ingredients.each do |ingredient|%>
         <input type="hidden" name="ingredient_id" value="<%=ingredient.id%>">
         <li><%= ingredient.name %>  <button type="submit">Delete</button></li>
-        <%end%>
       </form>
+      <%end%>
     </ul>
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-5">
     <h3>Recipe Instructions:</h3>
     <ul>
         <li>  <%= @recipe.instructions %></li>
+        <form action="/recipe/<%=@recipe.id%>/instruction/delete" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="instructions" value="<%=@recipe.instructions%>">
+          <button type="submit">Delete</button>
+        </form>
     </ul>
   </div>
-  <div class="col-md-4">
+
+
+  <div class="col-md-2">
     <h3>Recipe Tags:</h3>
     <ul>
        <% @recipe.tags.each do |tag|%>
@@ -30,7 +37,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-5">
 
     <form action="/recipe/<%=@recipe.id%>/ingredients/select" method="post">
 
@@ -57,7 +64,7 @@
     </form> <br>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-5">
 
     <form action="/recipe/<%=@recipe.id%>/instructions/add" method="post">
       <label for="instructions">Enter instructions for your recipe. Please specify quantities for your ingredients</label>
@@ -65,12 +72,16 @@
       <textarea name="instructions" rows="6" cols="30"></textarea>
       <button type="submit">Submit </button>
     </form>
+  </div>
 
-    <form action="/recipe/<%=@recipe.id%>/tags/add" method="post">
-      <label for="tag">Enter a tag for your recipe</label>
-      <br>
-      <input type="text" name="tag" id="tag">
-      <button type="submit">Submit </button>
-    </form>
+
+    <div class="col-md-2">
+      <form action="/recipe/<%=@recipe.id%>/tags/add" method="post">
+        <label for="tag">Enter a tag for your recipe</label>
+        <br>
+        <input type="text" name="tag" id="tag">
+        <button type="submit">Submit </button>
+      </form>
+    </div>
   </div>
 </div>
