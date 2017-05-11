@@ -1,0 +1,14 @@
+<h3>Edit Recipe Name:</h3>
+<form action="/recipe/<%=@recipe.id%>/edit" method="post">
+  <div class="form-group">
+    <input type="hidden" name="_method" value="patch">
+    <label for="recipe_name">Enter Your Recipe Name:</label>
+    <input type="text" name="recipe_name" id="recipe_name">
+  </div>
+  <div class="form_group">
+    <label for="instructions">Enter instructions for your recipe. Please specify quantities for your ingredients</label>
+    <br>
+    <textarea name="instructions" rows="6" cols="30"></textarea>
+  </div>
+  <button type="submit">Submit</button>
+</form>

@@ -63,8 +63,45 @@ patch "/recipe/:id/ingredient/delete" do
   redirect "/recipe/#{@recipe.id}"
 end
 
-delete "/recipe/:id/instruction/delete" do
+patch "/recipe/:id/instruction/delete" do
   @recipe = Recipe.find(params['id'].to_i)
   instructions = params["instructions"]
-  @recipe.instructions
+  @recipe.instructions.delete(instructions)
+  redirect "/recipe/#{@recipe.id}"
+end
+
+get "/recipe/:id/edit" do
+  @recipe = Recipe.find(params['id'].to_i)
+  erb(:edit_recipe)
+end
+
+patch "/recipe/:id/edit" do
+  @recipe = Recipe.find(params['id'].to_i)
+  name = params['recipe_name']
+  if name == ""
+    name = @recipe.name
+  end
+  instructions = params['instructions']
+  if instructions == ""
+    instructions = @recipe.instructions
+  end
+  @recipe.update(name: name, instructions: instructions)
+  redirect "/"
+end
+
+delete "/recipe/:id/delete" do
+  @recipe = Recipe.find(params['id'].to_i)
+  @recipe.delete
+  redirect "/"
+end
+
+get "/tags" do
+  @all_tags = Tag.all
+  erb(:tags)
+end
+
+get "/tag/:id" do
+  @tag = Tag.find(params['id'])
+  @all_recipes = Recipe.all
+  erb(:recipe_tags)
 end

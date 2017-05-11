@@ -1,4 +1,12 @@
 <h1><%=@recipe.name%></h1>
+<a href="/recipe/<%=@recipe.id%>/edit">Edit This Recipe</a>
+<br>
+
+<form action="/recipe/<%=@recipe.id%>/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit">Delete</button>
+</form>
+
 <div class="row">
 
   <div class="col-md-5">
@@ -16,14 +24,9 @@
 
   <div class="col-md-5">
     <h3>Recipe Instructions:</h3>
-    <ul>
-        <li>  <%= @recipe.instructions %></li>
-        <form action="/recipe/<%=@recipe.id%>/instruction/delete" method="post">
-          <input type="hidden" name="_method" value="delete">
-          <input type="hidden" name="instructions" value="<%=@recipe.instructions%>">
-          <button type="submit">Delete</button>
-        </form>
-    </ul>
+      <p>
+      <%= @recipe.instructions %>
+      </p>
   </div>
 
 
