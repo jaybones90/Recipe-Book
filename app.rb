@@ -46,12 +46,19 @@ post "/recipe/:id/instructions/add" do
   @recipe = Recipe.find(params['id'].to_i)
   instructions = params['instructions']
   @recipe.update(instructions: instructions)
-
+  redirect "/recipe/#{@recipe.id}"
 end
 
 post "/recipe/:id/tags/add" do
   @recipe = Recipe.find(params['id'].to_i)
   tag = params['tag']
   @recipe.tags.push(Tag.new(category: tag))
+  redirect "/recipe/#{@recipe.id}"
+end
+
+patch "/recipe/:id/ingredient/delete" do
+  @recipe = Recipe.find(params['id'].to_i)
+  ingredient = Ingredient.find(params['ingredient_id'])
+  @recipe.ingredients.delete(ingredient)
   redirect "/recipe/#{@recipe.id}"
 end
